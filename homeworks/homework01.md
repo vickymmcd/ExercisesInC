@@ -4,7 +4,11 @@
 
 [Here is a link to the ex01 directory in my repository](https://github.com/vickymmcd/ExercisesInC/tree/master/exercises/ex01)
 
+
 ### Think OS Chapter 1 reading questions
+
+For each of the reading questions below, write answers in the form of
+a clear, concise, complete sentence or two.
 
 1) Give an example of a feature common in interpreted languages that is rare in compiled languages.
 
@@ -26,8 +30,7 @@ You might want to turn off optimization because it could cause a subtle bug to a
 
 The `-S` flag tells `gcc` to compile the program and create human readable assembly code. `gcc` is configured to generate code for the machine you are running on meaning you will see different results on different computers.
 
-6) If you spell a variable name wrong, or if you spell a function name wrong, the error messages
-you get might look very different.  Why?
+6) If you spell a variable name wrong, or if you spell a function name wrong, the error messages you get might look very different.  Why?
 
 If you spell a function name wrong you will get a message from the linker whereas if you spell a variable name wrong you will get a message from the compiler.
 
