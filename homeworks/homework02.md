@@ -16,10 +16,10 @@ a clear, concise, complete sentence or two.
 the ones in the book).  What is abstractly true about the system that
 is not literally true about the implementation?
 
-(change to make it not from book later) A real world example of virtualization is an inter library collaboration where libraries
-can borrow books from each other. A person can request a book from the library and it can either come from a shelf at the local
-library or from another library's collection. Abstractly there is an illusion that the library has every book in the world while
-in reality the library might only have a small collection.
+A real world example of virtualization is the Amazon marketplace where people can buy things from Amazon or other
+sources. A person purchase anything from Amazon and it can come from a variety of places such as an Amazon warehouse
+or someone's home. Abstractly there is an illusion that Amazon is some physical place that has nearly every product
+while in reality the products you get can be quite spread out and come from many different warehouses.
 
 2. What is the difference between a program and a process?
 
