@@ -1,5 +1,6 @@
 /* Example code for Exercises in C.
 
+Vicky McDermott
 Modified version of an example from Chapter 2.5 of Head First C.
 
 */
@@ -7,6 +8,7 @@ Modified version of an example from Chapter 2.5 of Head First C.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <regex.h>
 
 #define NUM_TRACKS 5
 

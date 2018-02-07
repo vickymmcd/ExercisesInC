@@ -13,12 +13,26 @@ student repository.
 
 1) The Georgian alphabet has 33 letters.  How many bit are needed to specify a letter?
 
-2) In the UTF-16 character encoding, the binary representation of a character can take up to 32 bits.  
+6 bits are needed to specify a letter because 2^6 > 33 and a given number of bits, b, can
+specify 2^b different values. Unfortunately, 5 bits can specify only 32 values, and since
+there are 33 letters in the Georgian alphabet, you will need the 6th bit to specify 33
+different letter values.
+
+2) In the UTF-16 character encoding, the binary representation of a character can take up to 32 bits.
 Ignoring the details of the encoding scheme, how many different characters can be represented?
+
+2^32 = 4294967296 different characters can be represented with 32 bits.
 
 3) What is the difference between "memory" and "storage" as defined in *Think OS*?
 
+Memory is volatile and lost when a computer is shut down while storage is non volatile and includes
+files on a hard disk drive or solid state drive that can be used for long term storage.
+
 4) What is the difference between a GiB and a GB?  What is the percentage difference in their sizes?
+
+A GiB is a gibibyte (binary unit, used to measure memory), which is 2^30 bytes, while a GB is a
+gigabyte (decimal unit, used to measure disk drives), which is 10^9 bytes. The percentage difference
+in their sizes is about 7.1%.
 
 5) How does the virtual memory system help isolate processes from each other?
 
@@ -27,4 +41,3 @@ Ignoring the details of the encoding scheme, how many different characters can b
 7) What Python data structure would you use to represent a sparse array?
 
 8) What is a context switch?
-
