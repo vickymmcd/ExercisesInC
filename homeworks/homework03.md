@@ -36,8 +36,22 @@ in their sizes is about 7.1%.
 
 5) How does the virtual memory system help isolate processes from each other?
 
+The virtual memory system helps to isolate processes from each other by not allowing a process to
+map to the same physical memory as another process. Since physical memory is allocated to each process
+individually and each processes virtual addresses' map to physical addresses in the memory allocated
+for that process, each process is able to stay isolated from each other in memory.
+
 6) Why do you think the stack and the heap are usually located at opposite ends of the address space?
+
+I think the stack and the heap are located at opposite ends of the address space because the heap contains
+segments of memory that are allocated at runtime and therefore space needs to be left for the heap to grow
+up while the stack contains local variables and parameters and also needs room to expand down.
 
 7) What Python data structure would you use to represent a sparse array?
 
+A dictionary in Python might be used to represent a sparse array.
+
 8) What is a context switch?
+
+A context switch is a mechanism that allows an operating system to interrupt a running process, save its
+state, and then run another process.
