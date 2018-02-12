@@ -39,7 +39,31 @@ void find_track(char search_for[])
 // Prints track number and title.
 void find_track_regex(char pattern[])
 {
-    // TODO: fill this in
+    regex_t regex;
+    int result;
+    int i;
+
+    // compile regular expression
+    result = regcomp(&regex, pattern, 0);
+    if(result){
+      printf("Could not compile regex\n");
+      exit(1);
+    }
+
+    // execute the regular expression
+    for (i=0; i<NUM_TRACKS; i++) {
+      result = regexec(&regex, tracks[i], 0, NULL, 0);
+      if(!result){
+        printf("Track %i: '%s'\n", i, tracks[i]);
+      }
+      else if(result==REG_NOMATCH){
+
+      }
+      else{
+        printf("Regex match failed.\n");
+      }
+    }
+    regfree(&regex);
 }
 
 // Truncates the string at the first newline, if there is one.
@@ -60,8 +84,8 @@ int main (int argc, char *argv[])
     fgets(search_for, 80, stdin);
     rstrip(search_for);
 
-    find_track(search_for);
-    //find_track_regex(search_for);
+    //find_track(search_for);
+    find_track_regex(search_for);
 
     return 0;
 }
