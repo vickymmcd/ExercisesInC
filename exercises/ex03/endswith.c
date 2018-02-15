@@ -28,6 +28,11 @@ returns: 1 if true, 0 otherwise
 int endswith(char *s, char *suffix)
 {
     // TODO: Fill this in!
+    if (strstr(s, suffix)) {
+        if(strcmp(strstr(s, suffix), suffix) == 0){
+          return 1;
+        }
+    }
     return 0;
 }
 
