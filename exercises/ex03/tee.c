@@ -9,14 +9,13 @@ int main(int argc, char *argv[]){
   char input[256];
   FILE *output_file;
 
-  while((ch = getopt(argc, argv, "aip")) != EOF){
+  while((ch = getopt(argc, argv, "ai")) != EOF){
     switch(ch){
       case 'a':
         append = 1;
         break;
       case 'i':
-        break;
-      case 'p':
+        //optional to implement - come back if time
         break;
     }
   }
