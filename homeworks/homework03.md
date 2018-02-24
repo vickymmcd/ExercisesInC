@@ -2,56 +2,63 @@
 
 ### C Exercises
 
-Modify the link below so it points to the `ex02.5` directory in your
+Modify the link below so it points to the `ex03` directory in your
 student repository.
 
-[Here is a link to the ex02.5 directory in my repository](https://github.com/vickymmcd/ExercisesInC/tree/master/exercises/ex02.5)
+[Here is a link to the ex03 directory in my repository](https://github.com/vickymmcd/ExercisesInC/tree/master/exercises/ex03)
 
-### Think OS Chapter 3 reading questions
+### Think OS Chapter 4 reading questions
 
-### Virtual memory
+**Files and file systems**
 
-1) The Georgian alphabet has 33 letters.  How many bit are needed to specify a letter?
+1) What abstractions do file systems provide?  Give an example of something that is logically
+true about files systems but not true of their implementations.
 
-6 bits are needed to specify a letter because 2^6 > 33 and a given number of bits, b, can
-specify 2^b different values. Unfortunately, 5 bits can specify only 32 values, and since
-there are 33 letters in the Georgian alphabet, you will need the 6th bit to specify 33
-different letter values.
+Abstractly file systems are a mapping from a file name to that file's contents where you can think
+of the names as keys and the contents as values. It is logically true that file systems are byte
+based but in reality persistent storage is block based so the implementation has to translate
+byte based file operations into block based operations on storage devices.
 
-2) In the UTF-16 character encoding, the binary representation of a character can take up to 32 bits.
-Ignoring the details of the encoding scheme, how many different characters can be represented?
+2) What information do you imagine is stored in an `OpenFileTableEntry`?
 
-2^32 = 4294967296 different characters can be represented with 32 bits.
+The information that I imagine would be stored in the OpenFileTableEntry would be what files are
+currently open, whether they are open for reading or writing, and pointers to how much of each file
+has been read or written to.
 
-3) What is the difference between "memory" and "storage" as defined in *Think OS*?
+3) What are some of the ways operating systems deal with the relatively slow performance of persistent storage?
 
-Memory is volatile and lost when a computer is shut down while storage is non volatile and includes
-files on a hard disk drive or solid state drive that can be used for long term storage.
+Operating systems deal with the relatively slow performance of persistent storage using block transfers, prefetching
+(where the operating system loads additional blocks before they are requested), buffering (storing things in memory
+and writing to disk later), and caching (keeping a copy of the block in memory).
 
-4) What is the difference between a GiB and a GB?  What is the percentage difference in their sizes?
+4) Suppose your program writes a file and prints a message indicating that it is done writing.
+Then a power cut crashes your computer.  After you restore power and reboot the computer, you find that the
+file you wrote is not there.  What happened?
 
-A GiB is a gibibyte (binary unit, used to measure memory), which is 2^30 bytes, while a GB is a
-gigabyte (decimal unit, used to measure disk drives), which is 10^9 bytes. The percentage difference
-in their sizes is about 7.1%.
+Your computer was dealing with the relatively slow performance of persistent storage by using a process called
+buffering where it stored the data in memory with the plan of writing it to the disk later. When your computer crashed
+the data that was stored in memory was lost and was never written to the disk.
 
-5) How does the virtual memory system help isolate processes from each other?
+5) Can you think of one advantage of a File Allocation Table over a UNIX inode?  Or an advantage of a inode over a FAT?
 
-The virtual memory system helps to isolate processes from each other by not allowing a process to
-map to the same physical memory as another process. Since physical memory is allocated to each process
-individually and each processes virtual addresses' map to physical addresses in the memory allocated
-for that process, each process is able to stay isolated from each other in memory.
+One advantage of a File Allocation Table over a UNIX inode is that larger files can more easily be stored using a
+FAT where each block simply points to the next block, while UNIX inodes have a restricted number of blocks that any
+given file can use. An advantage of inodes over a FAT is that they reside on the disk along with the rest of the data
+and fit neatly into disk blocks.
 
-6) Why do you think the stack and the heap are usually located at opposite ends of the address space?
+6) What is overhead?  What is fragmentation?
 
-I think the stack and the heap are located at opposite ends of the address space because the heap contains
-segments of memory that are allocated at runtime and therefore space needs to be left for the heap to grow
-up while the stack contains local variables and parameters and also needs room to expand down.
+Minimal space overhead means that the data structures used by the allocator should be small, leaving as much space as possible
+for the data. If some blocks are unused or partially used, the unused space is called fragmentation.
 
-7) What Python data structure would you use to represent a sparse array?
+7) Why is the "everything is a file" principle a good idea?  Why might it be a bad idea?
 
-A dictionary in Python might be used to represent a sparse array.
+The "everything is a file" principle is a good idea because it makes life easier for programmers since they only have to learn
+one API and can make programs more versatile. It might be a bad idea because it might sometimes cause unpredictable or
+potentially buggy behavior in your code if you do not know exactly what format the data is coming in from or going out to is
+going to be.
 
-8) What is a context switch?
-
-A context switch is a mechanism that allows an operating system to interrupt a running process, save its
-state, and then run another process.
+If you would like to learn more about file systems, a good next step is to learn about journaling file systems.
+Start with [this Wikipedia article](https://en.wikipedia.org/wiki/Journaling_file_system), then
+[Anatomy of Linux Journaling File Systems](http://www.ibm.com/developerworks/library/l-journaling-filesystems/index.html).
+Also consider reading [this USENIX paper](https://www.usenix.org/legacy/event/usenix05/tech/general/full_papers/prabhakaran/prabhakaran.pdf).
