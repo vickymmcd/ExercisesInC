@@ -3,18 +3,21 @@
 #include <string.h>
 #include <assert.h>
 #include "util.h"
+#include "minunit.h"
+
+int tests_run = 0;
 
 static char *test1() {
     char *res = icmpcode_v4(1);
     char *message = "test1 failed: code 1 should return host unreachable";
-    mu_assert(message, res == "host unreachable");
+    mu_assert(message, strcmp(res, "host unreachable") == 0);
     return NULL;
 }
 
 static char *test2() {
     char *res = icmpcode_v4(5);
     char *message = "test2 failed: code 5 should return source route failed";
-    mu_assert(message, res == "source route failed");
+    mu_assert(message, strcmp(res, "source route failed")==0);
     return NULL;
 }
 

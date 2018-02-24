@@ -28,8 +28,8 @@ typedef struct rec {                /* outgoing UDP data */
   u_short seq;          /* sequence number */
 } Rec;
 
-Rec *rec = (Rec *) sendbuf;
-int datalen = sizeof (Rec);         /* length of the data in a datagram */
+//Rec *rec = (Rec *) sendbuf;
+//int datalen = sizeof (Rec);         /* length of the data in a datagram */
 
 
 /* the following are a few definitions from Stevens' unp.h */

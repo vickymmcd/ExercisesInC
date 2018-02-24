@@ -1,8 +1,11 @@
-main: trout.h util.h trout.c util.c main.c
-	gcc -g -o main main.c trout.c util.c
+trout.o: trout.h util.h trout.c
+	gcc -c trout.c
 
-trout: trout.h util.h util.c trout.c
-	gcc -g -o trout trout.c util.c
+util.o: util.h util.c
+	gcc -c util.c
 
-util: trout.h util.h trout.c util.c
-	gcc -g -o util util.c
+main.o: util.h trout.h main.c
+	gcc -c main.c
+
+main: main.o trout.o util.o
+	gcc -g -o main main.o trout.o util.o
