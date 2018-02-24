@@ -33,7 +33,7 @@ returns: new array, caller must free
 */
 // TODO: Write this function
 double *get_int_part(double array[], int length){
-  double *result = malloc(length);
+  double *result = malloc(length*sizeof(double));
   int i;
   for (i=0; i<length; i++){
     modf(array[i], &result[i]);
