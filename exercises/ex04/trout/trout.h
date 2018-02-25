@@ -1,3 +1,5 @@
+#ifndef trout_h
+#define trout_h
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/time.h>
@@ -23,8 +25,8 @@
 #define BUFSIZE 1500
 
 /* variables we might want to configure */
-int max_ttl = 30;
-int nprobes = 2;
+int max_ttl;
+int nprobes;
 
 typedef struct timeval Timeval;
 typedef struct sockaddr Sockaddr;
@@ -36,7 +38,7 @@ Sockaddr *sabind;
 
 /* other global variables */
 
-int seq = 0;
+int seq;
 
 char recvbuf[BUFSIZE];
 
@@ -46,11 +48,14 @@ int pipefd[2];              /* the pipe for the alarm handler */
 socklen_t salen;                    /* length of a socket address */
 
 u_short sport;                      /* source UDP port # */
-u_short dport = 32768 + 668;        /* destination port -- hopefully unused */
+u_short dport;        /* destination port -- hopefully unused */
                                     /* 668 = the neighbor of the beast */
 Timeval sendtv[1];
 Timeval recvtv[1];
 Timeval difftv[1];
+
+int datalen;         /* length of the data in a datagram */
+
 
 // declaring functions from trout.c
 void sig_alrm(int signo);
@@ -62,3 +67,5 @@ void print_report ();
 void send_dgram (int ttl);
 int send_probes (int ttl);
 void loop_ttl ();
+
+#endif

@@ -1,6 +1,20 @@
 #include "trout.h"
 #include "util.h"
 
+/* variables we might want to configure */
+int max_ttl = 30;
+int nprobes = 2;
+
+int datalen = sizeof (Rec);         /* length of the data in a datagram */
+
+Rec *rec = (Rec *) sendbuf;
+int seq = 0;
+
+u_short sport;                      /* source UDP port # */
+u_short dport = 32768 + 668;        /* destination port -- hopefully unused */
+                                    /* 668 = the neighbor of the beast */
+
+
 
 /* NOTES: system calls beginning with a capital letter are Stevens's
    wrapper functions.  Each one invokes the method and checks the

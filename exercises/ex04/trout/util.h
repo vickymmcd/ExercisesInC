@@ -1,3 +1,5 @@
+#ifndef util_h
+#define util_h
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/time.h>
@@ -27,10 +29,6 @@ char sendbuf[BUFSIZE];
 typedef struct rec {                /* outgoing UDP data */
   u_short seq;          /* sequence number */
 } Rec;
-
-//Rec *rec = (Rec *) sendbuf;
-//int datalen = sizeof (Rec);         /* length of the data in a datagram */
-
 
 /* the following are a few definitions from Stevens' unp.h */
 
@@ -63,3 +61,5 @@ ssize_t Recvfrom(int fd, void *ptr, size_t nbytes, int flags,
 		 struct sockaddr *sa, socklen_t *salenptr);
 void err_sys (char *fmt, ...);
 void err_quit (char *fmt, ...);
+
+#endif
