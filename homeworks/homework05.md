@@ -25,12 +25,14 @@ We could use 12^3 to find this by flipping all the bits.
 3) Can you guess why IEEE floating-point uses biased integers to represent the exponent rather than a
 sign bit or two's complement?
 
-?? It is easier to store and unpack these values if we do it with a bias.
+?? It is easier to store and unpack these values if we do it with a bias. Also this is how we allocate
+space for when numbers are much larger.
 
-4) Following the example in Section 5.4, write the 32-bit binary representation of -13 in single precision
+4) Following the example in Section 5.3, write the 32-bit binary representation of -13 in single precision
 IEEE floating-point.  What would you get if you accidentally interpreted this value as an integer?
 
-??
+Positive 13 is 1.101*2^3 so -13 would be 1.0010*2^4. If we accidentally interpreted this value as an integer in
+base 10 we would get 16.
 
 5) Write a function that takes a string and converts from lower-case to upper-case by flipping the sixth bit.
 As a challenge, you can make a faster version by reading the string 32 or 64 bits at a time, rather than one
