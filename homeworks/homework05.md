@@ -19,13 +19,13 @@ It will have more zeros at the beginning and be signed as a positive number.
 2) Write a C expression that computes the two's complement of 12 using the XOR bitwise operator.
 Try it out and confirm that the result is interpreted as -12.
 
-?? 12 in binary = 1100; 3 in binary is 11. Two's complement representation of 12 would be 00011.
-We could use 12^3 to find this by flipping all the bits.
+Need to flip all the bits and add 1. See my code in test3.c. Basically, made 2^32 subtracted 1
+and XORed that with 12 to flip all bits then added one and this returned 12.
 
 3) Can you guess why IEEE floating-point uses biased integers to represent the exponent rather than a
 sign bit or two's complement?
 
-?? It is easier to store and unpack these values if we do it with a bias. Also this is how we allocate
+It is easier to store and unpack these values if we do it with a bias. Also this is how we allocate
 space for when numbers are much larger.
 
 4) Following the example in Section 5.3, write the 32-bit binary representation of -13 in single precision
@@ -39,3 +39,7 @@ As a challenge, you can make a faster version by reading the string 32 or 64 bit
 character at a time.  This optimization is made easier if the length of the string is a multiple of 4 or 8 bytes.
 
 A space has the value of 32 which is the sixth bit so you can flip the case of a letter by doing letter ^ " ".
+My pseudocode for this function:
+char[] toUpper(char[] s){
+  return s ^ 32;
+}
