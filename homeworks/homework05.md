@@ -20,7 +20,7 @@ It will have more zeros at the beginning and be signed as a positive number.
 Try it out and confirm that the result is interpreted as -12.
 
 Need to flip all the bits and add 1. See my code in test3.c. Basically, made 2^32 subtracted 1
-and XORed that with 12 to flip all bits then added one and this returned 12.
+and XORed that with 12 to flip all bits then added one and this returned -12.
 
 3) Can you guess why IEEE floating-point uses biased integers to represent the exponent rather than a
 sign bit or two's complement?
