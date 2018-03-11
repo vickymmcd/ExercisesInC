@@ -85,7 +85,6 @@ void push(Node **list, int val) {
 * returns: number of nodes removed
 */
 int remove_by_value(Node **list, int val) {
-    // FILL THIS IN!
     Node *current = *list;
     Node *prev = current;
     while(current != NULL){
@@ -113,8 +112,6 @@ int remove_by_value(Node **list, int val) {
 * list: pointer to pointer to Node
 */
 void reverse(Node **list) {
-    // FILL THIS IN!
-    // FILL THIS IN!
     Node *current = *list;
     Node *prev = current;
     Node *newcurrent = prev->next;
