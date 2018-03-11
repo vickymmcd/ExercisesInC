@@ -21,14 +21,16 @@ int read_element(int *array, int index) {
 
 int main()
 {
-    int never_allocated;
+    // I commented it out variables we never used
+    // int never_allocated;
     int *free_twice = malloc(sizeof (int));
     int *use_after_free = malloc(sizeof (int));
     int *never_free = malloc(sizeof (int));
-    int array1[100];
-    int *array2 = malloc(100 * sizeof (int));
+    int *array1 = malloc(100 * sizeof (int));
+    // int *array2 = malloc(100 * sizeof (int));
 
     // valgrind does not bounds-check static arrays
+    // let's just make sure we read values in the bounds
     read_element(array1, 1);
     read_element(array1, 10);
 
@@ -37,7 +39,7 @@ int main()
     //read_element(array2, 10);
 
     // and it catches use after free
-    free(use_after_free);
+    // I moved free to be later
     *use_after_free = 17;
 
     // never_free is definitely lost
@@ -47,10 +49,15 @@ int main()
     // free(&never_allocated);
 
     // but this one doesn't
-    free_anything(&never_allocated);
+    // don't free things we never allocated
+    //free_anything(&never_allocated);
 
+    free(use_after_free);
     free(free_twice);
-    free(free_twice);
+    free(never_free);
+    free(array1);
+    // don't free it twice
+    //free(free_twice);
 
     return 0;
 }
