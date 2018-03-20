@@ -36,11 +36,15 @@ Often, many different functions operate on the same variable, one after the othe
 
 No, because for a program to be "cache aware," its algorithms must be tailored to the size of the cache, the block size, and other hardware characteristics. Refactoring the program to improve locality is a step in the right direction, but until you take the hardware makeup into account and start designing with specific sizes and characteristics in mind, your program is not truly "cache aware."
 
-left off at beginning of section 7.6
-
 6) See if you can estimate the cost of a memory cache by comparing the prices of two similar CPUs with
 different cache sizes.
 
+My estimate for the cost of a memory cache would be about $5000 per GiB.
+
 7) Why are cache policies generally more complex at the bottom of the memory hierarchy?
 
+Cache policies are generally more complex at the bottom of the memory hierarchy because cache policies at the top of the hierarchy need to be simple because they need to be fast and are mostly implemented in hardware. Cache policies at the bottom of the hierarchy, on the other hand, have more time to make decisions and well designed policies make a big difference in performance.
+
 8) Can you think of a strategy operating systems could use to avoid thrashing or recover when it occurs?
+
+Operating systems could avoid thrashing by detecting an increase in paging and blocking or killing processes until the system is responsive again. Similarly, they could recover by killing processes when thrashing occurs.
