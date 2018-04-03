@@ -30,7 +30,11 @@ Matrix *make_matrix(int num_rows, int num_cols) {
 /* Free a matrix.
 */
 void free_matrix(Matrix *matrix) {
-    // TODO: Fill this in.
+    for (int i=0; i<matrix->num_rows; i++) {
+        free(matrix->rows[i]);
+    }
+    free(matrix->rows);
+    free(matrix);
 }
 
 /* Print a row of a matrix.
@@ -57,6 +61,14 @@ of row i is 0.
 */
 void reduce_matrix_rows(Matrix *matrix, int i, int j) {
     // TODO: Fill this in.
+    double *rowi = matrix->rows[i];
+    double *rowj = matrix->rows[j];
+    double first_element = rowj[0];
+    double multiple = rowi[0]/first_element;
+
+    for (int i=0; i<matrix->num_cols; i++){
+      rowi[i] = rowi[i] - multiple*rowj[i];
+    }
 }
 
 int main () {
@@ -71,6 +83,7 @@ int main () {
     printf("reducing...\n");
     reduce_matrix_rows(matrix, 1, 0);
     reduce_matrix_rows(matrix, 2, 0);
+
     print_matrix(matrix);
 
     free_matrix(matrix);
