@@ -45,6 +45,22 @@ void print_matrix_row(double *row, int num_cols) {
     }
 }
 
+int compare_rows(const void* rowa, const void* rowb){
+  double *a = (double*)rowa;
+  double *b = (double*)rowb;
+
+  double result = b[0] - a[0];
+  if(result==0){
+    return 0;
+  }
+  else if(result>0){
+    return 1;
+  }
+  else if(result<0){
+    return -1;
+  }
+}
+
 /* Print a matrix.
 */
 void print_matrix(Matrix *matrix) {
@@ -57,6 +73,7 @@ void print_matrix(Matrix *matrix) {
 /* Sort rows in descending order by first element.
 */
 void sort_matrix_rows(Matrix *matrix) {
+    qsort(matrix->rows, matrix->num_rows, sizeof(double*), compare_rows);
     // TODO: Write this function
 }
 
@@ -93,5 +110,5 @@ int main () {
     reduce_matrix_rows(matrix, 2, 0);
     print_matrix(matrix);
 
-    //free_matrix(matrix);
+    free_matrix(matrix);
 }
