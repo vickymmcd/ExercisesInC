@@ -74,6 +74,8 @@ void join_thread(pthread_t thread)
 void child_code(Shared *shared)
 {
     printf("counter = %d\n", shared->counter);
+    int i;
+    printf("address of i is: %p\n", &i);
     shared->counter++;
 }
 
@@ -89,6 +91,8 @@ void *entry(void *arg)
 int main()
 {
     int i;
+    printf("address of i in parent is: %p\n", &i);
+
     pthread_t child[NUM_CHILDREN];
 
     Shared *shared = make_shared();

@@ -13,7 +13,7 @@ License: GNU GPLv3
 
 void perror_exit(char *s)
 {
-  perror(s);  
+  perror(s);
   exit(-1);
 }
 
