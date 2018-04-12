@@ -5,7 +5,7 @@
 Modify the link below so it points to the `ex12` directory in your
 student repository.  That's right, Homework 10 is to do Exercise 12.
 
-[Here is a link to the ex12 directory in my repository](https://github.com/YOUR_GITHUB_USERNAME_HERE/ExercisesInC/tree/master/exercises/ex12)
+[Here is a link to the ex12 directory in my repository](https://github.com/vickymmcd/ExercisesInC/tree/master/exercises/ex12)
 
 ### Think OS Chapter 10 reading questions
 
@@ -26,7 +26,3 @@ the queue in an inconsistent state.
 7) Do you have to lock the mutex to signal a condition variable?
 
 8) Does the condition have to be true when you signal a condition variable?
-
-
-
-
