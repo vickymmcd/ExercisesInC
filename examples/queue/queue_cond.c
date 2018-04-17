@@ -14,8 +14,10 @@ typedef struct {
     int length;
     int next_in;
     int next_out;
+    int num_elts;
     Mutex *mutex;
     Cond *nonempty;
+    Cond *nonfull;
 } Queue;
 
 /* Create an empty queue.
@@ -31,8 +33,10 @@ Queue *make_queue(int length)
     queue->array = (int *)check_malloc(length * sizeof(int));
     queue->next_in = 0;
     queue->next_out = 0;
+    queue->num_elts = 0;
     queue->mutex = make_mutex();
     queue->nonempty = make_cond();
+    queue->nonfull = make_cond();
     return queue;
 }
 
@@ -71,13 +75,14 @@ int queue_full(Queue *queue)
 */
 void queue_push(Queue *queue, int item) {
     mutex_lock(queue->mutex);
-    if (queue_full(queue)) {
-        mutex_unlock(queue->mutex);
-        perror_exit("queue is full");
+    while(queue_full(queue)){
+      cond_wait(queue->nonfull, queue->mutex);
     }
 
     queue->array[queue->next_in] = item;
     queue->next_in = queue_incr(queue, queue->next_in);
+    queue->num_elts++;
+    printf("number of elements %d\n", queue->num_elts);
     mutex_unlock(queue->mutex);
     cond_signal(queue->nonempty);
 }
@@ -90,7 +95,8 @@ int queue_pop(Queue *queue) {
 
     int item = queue->array[queue->next_out];
     queue->next_out = queue_incr(queue, queue->next_out);
+    queue->num_elts--;
     mutex_unlock(queue->mutex);
+    cond_signal(queue->nonfull);
     return item;
 }
-
