@@ -5,7 +5,7 @@
 Modify the link below so it points to the `ex11` directory in your
 student repository.
 
-[Here is a link to the ex11 directory in my repository](https://github.com/YOUR_GITHUB_USERNAME_HERE/ExercisesInC/tree/master/exercises/ex11)
+[Here is a link to the ex11 directory in my repository](https://github.com/vickymmcd/ExercisesInC/tree/master/exercises/ex11)
 
 ### Think OS Chapter 11 reading questions
 
@@ -25,9 +25,5 @@ what does it mean if the value of `queue->spaces` is `3` at some point in time?
 7) Any problem that can be solved with Semaphores can also be solved with mutexes and condition variables.
 How can you prove that that's true?
 
-8) What is Property 3?  Hint: see *The Little Book of Semaphores*, 
-[Section 4.3](http://greenteapress.com/semaphores/LittleBookOfSemaphores.pdf). 
-
-
-
-
+8) What is Property 3?  Hint: see *The Little Book of Semaphores*,
+[Section 4.3](http://greenteapress.com/semaphores/LittleBookOfSemaphores.pdf).
