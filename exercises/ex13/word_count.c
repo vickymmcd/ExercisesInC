@@ -12,6 +12,7 @@ Note: this version leaks memory.
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <glib.h>
 #include <glib/gstdio.h>
 
@@ -46,6 +47,23 @@ void printor(gpointer key, gpointer value, gpointer user_data)
     printf(user_data, key, *(gint *) value);
 }
 
+/* Iterator that frees pairs. */
+void pair_freeor(gpointer value, gpointer user_data)
+{
+    Pair *pair = (Pair *) value;
+    //free(pair->freq);
+    free(pair->word);
+    free(pair);
+}
+
+
+/* Iterator that frees keys and values. */
+void freeor(gpointer key, gpointer value, gpointer user_data)
+{
+    free(user_data);
+    free(key);
+    free(value);
+}
 
 /* Iterator that adds key-value pairs to a sequence. */
 void accumulator(gpointer key, gpointer value, gpointer user_data)
@@ -69,7 +87,9 @@ void incr(GHashTable* hash, gchar *key)
     if (val == NULL) {
         gint *val1 = g_new(gint, 1);
         *val1 = 1;
-        g_hash_table_insert(hash, key, val1);
+        gchar *keycpy = malloc(strlen(key)*sizeof(gchar *));
+        strcpy(keycpy, key);
+        g_hash_table_insert(hash, keycpy, val1);
     } else {
         *val += 1;
     }
@@ -107,6 +127,7 @@ int main(int argc, char** argv)
         array = g_strsplit(line, " ", 0);
         for (i=0; array[i] != NULL; i++) {
             incr(hash, array[i]);
+            free(array[i]);
         }
     }
     fclose(fp);
@@ -120,6 +141,11 @@ int main(int argc, char** argv)
 
     // iterate the sequence and print the pairs
     g_sequence_foreach(seq, (GFunc) pair_printor, NULL);
+
+    // free everything
+    g_hash_table_foreach(hash, (GHFunc) freeor, NULL);
+    //free(hash);
+    //free(seq);
 
     // try (unsuccessfully) to free everything
     // (in a future exercise, we will fix the memory leaks)

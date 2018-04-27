@@ -46,6 +46,20 @@ void print_list(Node **list) {
     printf("]\n");
 }
 
+/* Frees the nodes in a list.
+*
+* list: pointer to pointer to Node
+*/
+void free_list(Node **list) {
+    Node *current = *list;
+
+    while (current != NULL) {
+        Node *prev = current;
+        current = current->next;
+        free(prev);
+    }
+}
+
 
 /* Removes and returns the first element of a list.
 *
@@ -199,6 +213,7 @@ int main() {
 
     printf("test_list\n");
     print_list(&test_list);
+    free_list(&test_list);
 
     // make an empty list
     printf("empty\n");
@@ -207,9 +222,10 @@ int main() {
     // add an element to the empty list
     insert_by_index(&empty, 1, 0);
     print_list(&empty);
+    free_list(&empty);
 
     Node *something = make_something();
-    free(something);
+    free_list(&something);
 
     return 0;
 }
