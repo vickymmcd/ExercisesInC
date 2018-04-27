@@ -44,16 +44,6 @@ void kv_printor (gpointer key, gpointer value, gpointer user_data)
     printf(user_data, key, *(gint *) value);
 }
 
-/* Iterator that frees pairs. */
-void pair_freeor(gpointer value, gpointer user_data)
-{
-    Pair *pair = (Pair *) value;
-    //free(pair->freq);
-    free(pair->word);
-    free(pair);
-}
-
-
 /* Iterator that frees keys and values. */
 void freeor(gpointer key, gpointer value, gpointer user_data)
 {
@@ -74,6 +64,8 @@ void accumulator(gpointer key, gpointer value, gpointer user_data)
         (gpointer) pair,
         (GCompareDataFunc) compare_pair,
         NULL);
+
+    g_free(value);
 }
 
 /* Increments the frequency associated with key. */
@@ -90,6 +82,11 @@ void incr(GHashTable* hash, gchar *key)
     } else {
         *val += 1;
     }
+}
+
+void pair_free(gpointer pair_data){
+  Pair *pair = (Pair*) pair_data;
+  g_free(pair);
 }
 
 int main(int argc, char** argv)
@@ -113,6 +110,7 @@ int main(int argc, char** argv)
     (one-L) NUL terminated strings */
     gchar **array;
     gchar line[128];
+    int i;
     GHashTable* hash = g_hash_table_new(g_str_hash, g_str_equal);
 
     // read lines from the file and build the hash table
@@ -121,10 +119,10 @@ int main(int argc, char** argv)
         if (res == NULL) break;
 
         array = g_strsplit(line, " ", 0);
-        for (int i=0; array[i] != NULL; i++) {
+        for (i=0; array[i] != NULL; i++) {
             incr(hash, array[i]);
-            free(array[i]);
         }
+        g_strfreev(array);
     }
     fclose(fp);
 
@@ -132,7 +130,7 @@ int main(int argc, char** argv)
     // g_hash_table_foreach(hash, (GHFunc) kv_printor, "Word %s freq %d\n");
 
     // iterate the hash table and build the sequence
-    GSequence *seq = g_sequence_new(NULL);
+    GSequence *seq = g_sequence_new(pair_free);
     g_hash_table_foreach(hash, (GHFunc) accumulator, (gpointer) seq);
 
     // iterate the sequence and print the pairs
@@ -140,8 +138,6 @@ int main(int argc, char** argv)
 
     // free everything
     g_hash_table_foreach(hash, (GHFunc) freeor, NULL);
-    //free(hash);
-    //free(seq);
 
     // try (unsuccessfully) to free everything
     g_hash_table_destroy(hash);
